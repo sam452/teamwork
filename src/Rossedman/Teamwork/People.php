@@ -17,6 +17,7 @@ class People extends AbstractObject {
      */
     public function all($args = null)
     {
+        
         $this->areArgumentsValid($args, ['page', 'pageSize', 'emailaddress']);
 
         return $this->client->get($this->endpoint, $args)->response();

@@ -46,6 +46,11 @@ class Project extends AbstractObject {
         return $this->client->get("$this->endpoint/$this->id/people")->response();
     }
 
+    public function all()
+    {
+        return $this->client->get("$this->endpoint")->response();
+    }
+
     /**
      * Get Starred Projects
      * GET /projects/starred.json

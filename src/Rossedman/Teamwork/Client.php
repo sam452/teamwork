@@ -133,10 +133,24 @@ class Client implements RequestableInterface {
         {
             $params = json_encode($params);
         }
+        // $my_client = new Guzzle([
+        //     'base_url' => [env('TEAMWORK_URL')],
+        //     'auth' => [$this->key, 'xxx'],
+        //     ]
+        //     );
+        // $my_request = $my_client->createRequest(
+        //     'GET',
+        //     $this->buildURL($endpoint),
+        //     ['body' => $params]
+        //     );
+        $my_request = new \GuzzleHttp\Psr7\Request('GET', env('TEAMWORK_URL') . $this->buildURL($endpoint), ['Authorization' => 'Basic ' . base64_encode($this->key.':xxx'), 'body' => $params]);
+            // $my_request->request = 
+        // dd($my_request);
+        $this->request = $my_request;
 
-        $this->request = $this->client->createRequest($action,
-            $this->buildUrl($endpoint), ['auth' => [$this->key, 'X'], 'body' => $params]
-        );
+        // createRequest($action,
+        //     $this->buildUrl($endpoint), ['auth' => [$this->key, 'X'], 'body' => $params]
+        // );
 
         if ($query != null)
         {
@@ -156,7 +170,7 @@ class Client implements RequestableInterface {
     {
         $this->response = $this->client->send($this->request);
 
-        return $this->response->json();
+        return $this->response;
     }
 
     /**
