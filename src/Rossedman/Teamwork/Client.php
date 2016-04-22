@@ -170,7 +170,9 @@ class Client implements RequestableInterface {
     {
         $this->response = $this->client->send($this->request);
 
-        return $this->response;
+        $response = $this->response;
+
+        return json_decode($response->getBody()->getContents());
     }
 
     /**
