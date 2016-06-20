@@ -25,6 +25,16 @@ class Project extends AbstractObject {
     }
 
     /**
+     * GET a single project
+     * GET /projects/{project_id}.json
+    */
+
+    public function show($args = null)
+    {
+        return $this->client->get("$this->endpoint/$this->id", $args)->response();
+    }
+
+    /**
      * Get Companies In Project
      * GET /projects/{project_id}/companies.json
      *
@@ -176,6 +186,17 @@ class Project extends AbstractObject {
     public function tasklists($args = null)
     {
         return $this->client->get("$this->endpoint/$this->id/tasklists", $args)->response();
+    }
+
+    /**
+     * Tasks
+     * GET /projects/{project_id}/task.json
+     *
+     * @return [type] [description]
+     */
+    public function tasks($args = null)
+    {
+        return $this->client->get("$this->endpoint/$this->id/tasks", $args)->response();
     }
 
 

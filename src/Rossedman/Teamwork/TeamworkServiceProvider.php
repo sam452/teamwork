@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client as Guzzle;
 use Illuminate\Support\ServiceProvider;
+use Auth;
 
 class TeamworkServiceProvider extends ServiceProvider {
 
@@ -13,7 +14,8 @@ class TeamworkServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->app['rossedman.teamwork'] = $this->app->share(function($app)
-        {
+        { 
+
             $client = new \Rossedman\Teamwork\Client(new Guzzle,
                 $app['config']->get('services.teamwork.key'),
                 $app['config']->get('services.teamwork.url')
